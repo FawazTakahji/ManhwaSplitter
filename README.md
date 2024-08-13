@@ -16,7 +16,7 @@
 
 ## Usage
 Go to the
-<a href="https://github.com/FawazTakahai/ManhwaSplitter/releases">releases</a>
+<a href="https://github.com/FawazTakahji/ManhwaSplitter/releases">releases</a>
 page and download the version for your platform.
 
 >Make sure to install the latest <a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">.NET 8 runtime</a> on desktop.
