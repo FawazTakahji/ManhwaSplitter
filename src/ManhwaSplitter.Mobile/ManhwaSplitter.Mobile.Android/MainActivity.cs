@@ -56,6 +56,12 @@ public class MainActivity : AvaloniaMainActivity<App>
             Notification.CreateNotificationChannels();
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Process.KillProcess(Process.MyPid());
+    }
+
     public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
     {
         Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
