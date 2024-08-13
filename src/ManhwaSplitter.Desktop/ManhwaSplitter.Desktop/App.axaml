@@ -1,0 +1,15 @@
+<Application x:Class="ManhwaSplitter.Desktop.App"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:u-Semi="https://irihi.tech/ursa/themes/semi"
+             RequestedThemeVariant="Default">
+
+    <Application.Styles>
+        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
+        <u-Semi:SemiTheme Locale="en-US" />
+
+        <Style Selector="Button">
+            <Setter Property="TextElement.FontWeight" Value="Normal" />
+        </Style>
+    </Application.Styles>
+</Application>

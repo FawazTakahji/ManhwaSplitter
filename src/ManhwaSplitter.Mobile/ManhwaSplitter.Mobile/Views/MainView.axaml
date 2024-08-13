@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="ManhwaSplitter.Mobile.Views.MainView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:ManhwaSplitter.Mobile.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dialog="clr-namespace:AvaloniaDialogs.Views;assembly=AvaloniaDialogs"
+             xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
+             xmlns:material="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:models="clr-namespace:ManhwaSplitter.Core.Models;assembly=ManhwaSplitter.Core"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             xmlns:views="clr-namespace:ManhwaSplitter.Mobile.Views"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:MainViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="viewModels:HomeViewModel">
+            <views:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="viewModels:SettingsViewModel">
+            <views:SettingsView />
+        </DataTemplate>
+        <DataTemplate DataType="viewModels:AboutViewModel">
+            <views:AboutView />
+        </DataTemplate>
+    </UserControl.DataTemplates>
+
+    <UserControl.Resources>
+        <converters:ViewToIconConverter x:Key="ViewToIconConverter" />
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="dialogHostAvalonia|DialogHost">
+            <Setter Property="Background" Value="{DynamicResource MaterialPaperBrush}" />
+            <Setter Property="OverlayBackground" Value="Black" />
+        </Style>
+    </UserControl.Styles>
+
+    <dialog:ReactiveDialogHost>
+        <Grid RowDefinitions="*, Auto">
+            <ContentControl Grid.Row="0"
+                            Content="{Binding NavigationService.CurrentView}" />
+
+            <material:Card Grid.Row="1"
+                           Padding="0"
+                           CornerRadius="0">
+                <ListBox HorizontalAlignment="Stretch"
+                         ItemsSource="{Binding NavigationItems}"
+                         SelectedItem="{Binding SelectedNavigationItem}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Height="64"
+                                         HorizontalAlignment="Stretch"
+                                         Rows="1" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:NavigationItem">
+                            <mi:MaterialIcon Width="32"
+                                             Height="32"
+                                             Kind="{Binding View, Converter={StaticResource ViewToIconConverter}}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </material:Card>
+        </Grid>
+    </dialog:ReactiveDialogHost>
+</UserControl>

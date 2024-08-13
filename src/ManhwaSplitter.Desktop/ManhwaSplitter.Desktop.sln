@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManhwaSplitter.Desktop", "ManhwaSplitter.Desktop\ManhwaSplitter.Desktop.csproj", "{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3DA99C4E-89E3-4049-9C22-0A7EC60D83D8}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManhwaSplitter.Desktop.Windows", "ManhwaSplitter.Desktop.Windows\ManhwaSplitter.Desktop.Windows.csproj", "{2FEA4B38-BAD8-41C5-AC4F-E57F398C354E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManhwaSplitter.Desktop.MacOS", "ManhwaSplitter.Desktop.MacOS\ManhwaSplitter.Desktop.MacOS.csproj", "{04E11DB3-061C-4AE5-BD16-D9CBFD1F301A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManhwaSplitter.Desktop.Linux", "ManhwaSplitter.Desktop.Linux\ManhwaSplitter.Desktop.Linux.csproj", "{F90D4F44-F34F-4751-9F5B-A5BEB1D8B870}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBFA8512-1EA5-4D8C-B4AC-AB5B48A6D568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FEA4B38-BAD8-41C5-AC4F-E57F398C354E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEA4B38-BAD8-41C5-AC4F-E57F398C354E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEA4B38-BAD8-41C5-AC4F-E57F398C354E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEA4B38-BAD8-41C5-AC4F-E57F398C354E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E11DB3-061C-4AE5-BD16-D9CBFD1F301A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E11DB3-061C-4AE5-BD16-D9CBFD1F301A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E11DB3-061C-4AE5-BD16-D9CBFD1F301A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E11DB3-061C-4AE5-BD16-D9CBFD1F301A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F90D4F44-F34F-4751-9F5B-A5BEB1D8B870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90D4F44-F34F-4751-9F5B-A5BEB1D8B870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90D4F44-F34F-4751-9F5B-A5BEB1D8B870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90D4F44-F34F-4751-9F5B-A5BEB1D8B870}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83CB65B8-011F-4ED7-BCD3-A6CFA935EF7E}
+	EndGlobalSection
+EndGlobal

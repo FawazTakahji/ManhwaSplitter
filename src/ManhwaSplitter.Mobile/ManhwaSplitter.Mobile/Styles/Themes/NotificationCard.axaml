@@ -1,0 +1,117 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+                    xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel>
+                <NotificationCard Content="Meow"
+                                  NotificationType="Information" />
+                <NotificationCard Content="Meow"
+                                  NotificationType="Success" />
+                <NotificationCard Content="Meow"
+                                  NotificationType="Warning" />
+                <NotificationCard Content="Meow"
+                                  NotificationType="Error" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type NotificationCard}"
+                  TargetType="NotificationCard">
+        <Setter Property="assists:ShadowAssist.ShadowDepth" Value="Depth2" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Width" Value="350" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="RenderTransformOrigin" Value="50%,75%" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <LayoutTransformControl Name="PART_LayoutTransformControl"
+                                        UseRenderTransform="True">
+                    <controls:Card Margin="0,8,0,0"
+                                   Padding="0"
+                                   assists:ShadowAssist.ShadowDepth="{TemplateBinding assists:ShadowAssist.ShadowDepth}">
+                        <DockPanel>
+                            <Panel x:Name="PART_HeaderBar"
+                                   Height="4"
+                                   DockPanel.Dock="Top" />
+                            <ContentControl Name="PART_Content"
+                                            Padding="8"
+                                            Content="{TemplateBinding Content}" />
+                        </DockPanel>
+                    </controls:Card>
+                </LayoutTransformControl>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^:information /template/ Panel#PART_HeaderBar">
+            <Setter Property="Background" Value="{DynamicResource MaterialPrimaryMidBrush}" />
+        </Style>
+        <Style Selector="^:success /template/ Panel#PART_HeaderBar">
+            <Setter Property="Background" Value="Lime" />
+        </Style>
+        <Style Selector="^:warning /template/ Panel#PART_HeaderBar">
+            <Setter Property="Background" Value="Orange" />
+        </Style>
+        <Style Selector="^:error /template/ Panel#PART_HeaderBar">
+            <Setter Property="Background" Value="Crimson" />
+        </Style>
+
+        <Style Selector="^[IsClosing=true] /template/ LayoutTransformControl#PART_LayoutTransformControl">
+            <Setter Property="RenderTransformOrigin" Value="50%,0%" />
+            <Style.Animations>
+                <Animation Easing="QuadraticEaseOut"
+                           FillMode="Forward"
+                           Duration="0:0:0.75">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="TranslateTransform.X" Value="0" />
+                        <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    </KeyFrame>
+                    <KeyFrame Cue="70%">
+                        <Setter Property="TranslateTransform.X" Value="800" />
+                        <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="ScaleTransform.ScaleY" Value="0" />
+                        <Setter Property="TranslateTransform.X" Value="800" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <Style Selector="^[IsClosing=true]">
+            <Style.Animations>
+                <Animation Easing="QuadraticEaseOut"
+                           FillMode="Forward"
+                           Duration="0:0:1.25">
+                    <KeyFrame Cue="100%">
+                        <Setter Property="IsClosed" Value="True" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+
+        <ControlTheme.Animations>
+            <Animation Easing="QuadraticEaseIn"
+                       FillMode="Forward"
+                       Duration="0:0:0.45">
+                <KeyFrame Cue="0%">
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="TranslateTransform.Y" Value="20" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="0.85" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="0.85" />
+                </KeyFrame>
+                <KeyFrame Cue="30%">
+                    <Setter Property="TranslateTransform.Y" Value="-20" />
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="TranslateTransform.Y" Value="0" />
+                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
+                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
+                </KeyFrame>
+            </Animation>
+        </ControlTheme.Animations>
+    </ControlTheme>
+</ResourceDictionary>

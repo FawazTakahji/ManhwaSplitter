@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="ManhwaSplitter.Desktop.Views.AboutView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:AboutViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:AboutViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="5">
+            <Svg Width="128"
+                 Height="128"
+                 Path="/Assets/Icon.svg" />
+            <TextBlock HorizontalAlignment="Center"
+                       Classes="H1"
+                       Text="Manhwa Splitter"
+                       TextWrapping="Wrap"
+                       Theme="{StaticResource TitleTextBlock}" />
+            <TextBlock x:Name="TbVersion"
+                       HorizontalAlignment="Center"
+                       Classes="H4"
+                       Foreground="{DynamicResource SemiColorPrimary}"
+                       Theme="{StaticResource TitleTextBlock}" />
+
+            <u:IconButton Margin="0,15,0,0"
+                          HorizontalAlignment="Center"
+                          Command="{Binding CheckUpdatesCommand}"
+                          Content="Check Update"
+                          FontWeight="Normal"
+                          IconPlacement="Top"
+                          IsLoading="{Binding CheckUpdatesCommand.IsRunning}">
+                <u:IconButton.Icon>
+                    <i:Icon Value="fa-solid fa-rotate" />
+                </u:IconButton.Icon>
+            </u:IconButton>
+            <ToggleSwitch HorizontalAlignment="Center"
+                          IsChecked="{Binding SettingsService.CurrentSettings.CheckUpdateOnStartup}"
+                          OffContent="Check On Startup"
+                          OnContent="Check On Startup" />
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

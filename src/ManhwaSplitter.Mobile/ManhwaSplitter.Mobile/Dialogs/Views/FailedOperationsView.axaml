@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="ManhwaSplitter.Mobile.Dialogs.Views.FailedOperationsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dialogsViewModels="clr-namespace:ManhwaSplitter.Core.Dialogs.ViewModels;assembly=ManhwaSplitter.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:models="clr-namespace:ManhwaSplitter.Core.Models;assembly=ManhwaSplitter.Core"
+             Padding="4"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="dialogsViewModels:FailedOperationsViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <dialogsViewModels:FailedOperationsViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto, Auto">
+        <TextBlock Grid.Row="0"
+                   Classes="Headline6"
+                   Text="Failed to split some folders/images." />
+        <Separator Grid.Row="1" />
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding FailedOperations}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:FailedFolder">
+                        <StackPanel>
+                            <StackPanel Margin="16,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <mi:MaterialIcon Kind="Folder" />
+                                    <TextBlock FontWeight="Bold"
+                                               Text="{Binding Name}" />
+                                </StackPanel>
+                                <TextBlock Foreground="Orange"
+                                           Text="{Binding Reason}" />
+                            </StackPanel>
+                            <ItemsControl Margin="16,0,0,0"
+                                          IsVisible="{Binding Files, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          ItemsSource="{Binding Files}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Spacing="10" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.DataTemplates>
+                                    <DataTemplate DataType="models:FailedFile">
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal"
+                                                        Spacing="5">
+                                                <mi:MaterialIcon Kind="Image" />
+                                                <TextBlock FontWeight="Bold"
+                                                           Text="{Binding Name}" />
+                                            </StackPanel>
+                                            <TextBlock Foreground="Orange"
+                                                       Text="{Binding Reason}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       ToolTip.Tip="{Binding Reason}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.DataTemplates>
+                            </ItemsControl>
+
+                            <Separator />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Separator Grid.Row="3" />
+        <Button Grid.Row="4"
+                Click="OkButton_OnClick"
+                Content="OK" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="ManhwaSplitter.Desktop.Views.SettingsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enums="clr-namespace:ManhwaSplitter.Core.Enums;assembly=ManhwaSplitter.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:SettingsViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:SettingsViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="*, Auto">
+        <ScrollViewer Grid.Row="0">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="20">
+                <HeaderedContentControl Header="Theme"
+                                        Theme="{DynamicResource GroupBox}">
+                    <u:SelectionList SelectedItem="{Binding SettingsService.CurrentSettings.Theme}">
+                        <enums:Theme>System</enums:Theme>
+                        <enums:Theme>Light</enums:Theme>
+                        <enums:Theme>Dark</enums:Theme>
+                    </u:SelectionList>
+                </HeaderedContentControl>
+
+                <HeaderedContentControl Header="Max Height"
+                                        Theme="{DynamicResource GroupBox}">
+                    <StackPanel Spacing="5">
+                        <u:NumericIntUpDown FontSize="20"
+                                            Minimum="500"
+                                            Value="{Binding SettingsService.CurrentSettings.MaxHeight}" />
+                        <Button Command="{Binding GetScreenHeightCommand}"
+                                Content="Get Screen Height" />
+                    </StackPanel>
+                </HeaderedContentControl>
+
+                <HeaderedContentControl Header="Simultaneous Operations"
+                                        Theme="{DynamicResource GroupBox}">
+                    <StackPanel Spacing="5">
+                        <u:NumericIntUpDown FontSize="20"
+                                            Minimum="1"
+                                            Value="{Binding SettingsService.CurrentSettings.SimultaneousOperations}" />
+                        <Button Command="{Binding GetAvailableProcessorsCommand}"
+                                Content="Get Available Processors" />
+                    </StackPanel>
+                </HeaderedContentControl>
+
+                <HeaderedContentControl Header="Miscellaneous"
+                                        Theme="{DynamicResource GroupBox}">
+                    <CheckBox Content="Check for updates on startup"
+                              IsChecked="{Binding SettingsService.CurrentSettings.CheckUpdateOnStartup}" />
+                </HeaderedContentControl>
+            </StackPanel>
+        </ScrollViewer>
+        <Button Grid.Row="1"
+                Margin="10,5,10,5"
+                HorizontalAlignment="Right"
+                Command="{Binding ResetSettingsCommand}"
+                Content="Reset Settings" />
+    </Grid>
+</UserControl>

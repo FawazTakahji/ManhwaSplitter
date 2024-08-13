@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="ManhwaSplitter.Mobile.Views.SettingsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enums="clr-namespace:ManhwaSplitter.Core.Enums;assembly=ManhwaSplitter.Core"
+             xmlns:material="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:SettingsViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:SettingsViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="*, Auto">
+        <ScrollViewer Grid.Row="0"
+                      Theme="{StaticResource MaterialModernScrollViewer}">
+            <ScrollViewer.Styles>
+                <Style Selector="AccessText">
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                </Style>
+                <Style Selector="material|Card.SettingsCard">
+                    <Setter Property="Padding" Value="13" />
+                </Style>
+                <Style Selector="mi|MaterialIcon.LabelIcon">
+                    <Setter Property="Width" Value="24" />
+                    <Setter Property="Height" Value="24" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0,0,20,0" />
+                </Style>
+                <Style Selector="TextBlock.LabelText">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style Selector="StackPanel.LabelStackPanel">
+                    <Setter Property="Orientation" Value="Horizontal" />
+                    <Setter Property="Margin" Value="0,0,0,10" />
+                </Style>
+            </ScrollViewer.Styles>
+
+            <StackPanel>
+                <material:Card Classes="SettingsCard">
+                    <StackPanel>
+                        <StackPanel Classes="LabelStackPanel">
+                            <mi:MaterialIcon Classes="LabelIcon"
+                                             Kind="Brightness6" />
+                            <TextBlock Classes="Body1 LabelText"
+                                       Text="Theme" />
+                        </StackPanel>
+                        <material:Card Padding="0"
+                                       HorizontalAlignment="Left">
+                            <ListBox FontSize="16"
+                                     SelectedItem="{Binding SettingsService.CurrentSettings.Theme}">
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Padding" Value="10" />
+                                    </Style>
+                                </ListBox.Styles>
+
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+
+                                <enums:Theme>System</enums:Theme>
+                                <enums:Theme>Light</enums:Theme>
+                                <enums:Theme>Dark</enums:Theme>
+                            </ListBox>
+                        </material:Card>
+                    </StackPanel>
+                </material:Card>
+
+                <material:Card Classes="SettingsCard">
+                    <StackPanel>
+                        <StackPanel Classes="LabelStackPanel">
+                            <mi:MaterialIcon Classes="LabelIcon"
+                                             Kind="Image" />
+                            <TextBlock Classes="Body1 LabelText"
+                                       Text="Max Height" />
+                        </StackPanel>
+                        <StackPanel>
+                            <NumericUpDown FormatString="0"
+                                           Minimum="500"
+                                           Value="{Binding SettingsService.CurrentSettings.MaxHeight}" />
+                            <Button Command="{Binding GetScreenHeightCommand}"
+                                    Content="Get Screen Height" />
+                        </StackPanel>
+                    </StackPanel>
+                </material:Card>
+
+                <material:Card Classes="SettingsCard">
+                    <StackPanel>
+                        <StackPanel Classes="LabelStackPanel">
+                            <mi:MaterialIcon Classes="LabelIcon"
+                                             Kind="Sync" />
+                            <TextBlock Classes="Body1 LabelText"
+                                       Text="Simultaneous Operations" />
+                        </StackPanel>
+                        <StackPanel>
+                            <NumericUpDown FormatString="0"
+                                           Minimum="1"
+                                           Value="{Binding SettingsService.CurrentSettings.SimultaneousOperations}" />
+                            <Button Command="{Binding GetAvailableProcessorsCommand}"
+                                    Content="Get Available Processors" />
+                        </StackPanel>
+                    </StackPanel>
+                </material:Card>
+
+                <material:Card Classes="SettingsCard">
+                    <StackPanel>
+                        <StackPanel Classes="LabelStackPanel">
+                            <mi:MaterialIcon Classes="LabelIcon"
+                                             Kind="Dice5Outline" />
+                            <TextBlock Classes="Body1 LabelText"
+                                       Text="Miscellaneous" />
+                        </StackPanel>
+                        <CheckBox Content="Check for updates on startup"
+                                  IsChecked="{Binding SettingsService.CurrentSettings.CheckUpdateOnStartup}" />
+                    </StackPanel>
+                </material:Card>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="1"
+                Margin="10,5"
+                Command="{Binding ResetSettingsCommand}"
+                Content="Reset Settings"
+                FontSize="20" />
+    </Grid>
+</UserControl>

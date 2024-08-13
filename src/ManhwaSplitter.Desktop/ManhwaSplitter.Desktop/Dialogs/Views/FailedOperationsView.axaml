@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="ManhwaSplitter.Desktop.Dialogs.Views.FailedOperationsView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avalonia="https://github.com/projektanker/icons.avalonia"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dialogViewModels="clr-namespace:ManhwaSplitter.Core.Dialogs.ViewModels;assembly=ManhwaSplitter.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:ManhwaSplitter.Core.Models;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="dialogViewModels:FailedOperationsViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <dialogViewModels:FailedOperationsViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding FailedOperations}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models:FailedFolder">
+                    <HeaderedContentControl Theme="{DynamicResource GroupBox}">
+                        <HeaderedContentControl.Header>
+                            <StackPanel Spacing="5">
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="5">
+                                    <avalonia:Icon Value="fa-solid fa-folder" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                                <TextBlock Classes="Warning"
+                                           FontWeight="Normal"
+                                           IsVisible="{Binding Reason, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                           Text="{Binding Reason}"
+                                           TextTrimming="CharacterEllipsis"
+                                           ToolTip.Tip="{Binding Reason}" />
+                            </StackPanel>
+                        </HeaderedContentControl.Header>
+
+                        <ItemsControl IsVisible="{Binding Files, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                      ItemsSource="{Binding Files}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Spacing="10" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.DataTemplates>
+                                <DataTemplate DataType="models:FailedFile">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="5">
+                                            <avalonia:Icon Value="fa-solid fa-image" />
+                                            <TextBlock FontWeight="Bold"
+                                                       Text="{Binding Name}" />
+                                        </StackPanel>
+                                        <TextBlock Classes="Warning"
+                                                   Text="{Binding Reason}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTip.Tip="{Binding Reason}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.DataTemplates>
+                        </ItemsControl>
+                    </HeaderedContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>

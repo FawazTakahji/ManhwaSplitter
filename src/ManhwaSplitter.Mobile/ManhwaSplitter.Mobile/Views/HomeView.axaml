@@ -1,0 +1,82 @@
+<UserControl x:Class="ManhwaSplitter.Mobile.Views.HomeView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:HomeViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:HomeViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer Theme="{StaticResource MaterialModernScrollViewer}">
+        <Grid RowDefinitions="*,Auto">
+            <StackPanel Grid.Row="0"
+                        Margin="10,0"
+                        VerticalAlignment="Center"
+                        Spacing="20">
+                <!--  Max Height  -->
+                <StackPanel Spacing="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               Text="Max Height" />
+                    <NumericUpDown HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   FormatString="0px"
+                                   IsReadOnly="{Binding SplitImagesCommand.IsRunning}"
+                                   Minimum="500"
+                                   Value="{Binding SettingsService.CurrentSettings.MaxHeight}" />
+                    <Button Command="{Binding GetScreenHeightCommand}"
+                            Content="Get Screen Height" />
+                </StackPanel>
+                <!--  Max Height  -->
+
+                <StackPanel Spacing="10">
+                    <Button Command="{Binding SplitImagesCommand}"
+                            Content="Split Images" />
+
+                    <Button Command="{Binding SplitFoldersCommand}"
+                            Content="Split Folders" />
+                </StackPanel>
+            </StackPanel>
+
+            <!--  Progress  -->
+            <StackPanel Grid.Row="1"
+                        Margin="0,30,0,100"
+                        VerticalAlignment="Bottom"
+                        Spacing="20">
+                <ProgressBar IsIndeterminate="True">
+                    <ProgressBar.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <Binding Path="IsSplittingImages" />
+                            <Binding Path="IsSplittingFolders" />
+                            <Binding Path="SplitImagesCommand.IsRunning" />
+                            <Binding Path="SplitFoldersCommand.IsRunning" />
+                        </MultiBinding>
+                    </ProgressBar.IsVisible>
+                </ProgressBar>
+
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="20"
+                           IsVisible="{Binding IsSplittingFolders}">
+                    <Run Text="Splitting Folders" />
+                    <Run Text="{Binding FoldersProgress}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding FoldersMaxProgress}" />
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="20"
+                           IsVisible="{Binding IsSplittingImages}">
+                    <Run Text="Splitting Images" />
+                    <Run Text="{Binding ImagesProgress}" />
+                    <Run Text="/" />
+                    <Run Text="{Binding ImagesMaxProgress}" />
+                </TextBlock>
+            </StackPanel>
+            <!--  Progress  -->
+        </Grid>
+    </ScrollViewer>
+</UserControl>

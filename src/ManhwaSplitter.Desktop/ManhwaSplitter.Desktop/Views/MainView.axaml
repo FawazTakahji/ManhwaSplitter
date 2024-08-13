@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="ManhwaSplitter.Desktop.Views.MainView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:ManhwaSplitter.Desktop.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="https://github.com/projektanker/icons.avalonia"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:ManhwaSplitter.Core.Models;assembly=ManhwaSplitter.Core"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             xmlns:views="clr-namespace:ManhwaSplitter.Desktop.Views"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:MainViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="viewModels:HomeViewModel">
+            <views:HomeView />
+        </DataTemplate>
+        <DataTemplate DataType="viewModels:SettingsViewModel">
+            <views:SettingsView />
+        </DataTemplate>
+        <DataTemplate DataType="viewModels:AboutViewModel">
+            <views:AboutView />
+        </DataTemplate>
+    </UserControl.DataTemplates>
+
+    <UserControl.Resources>
+        <converters:ViewToIconConverter x:Key="ViewToIconConverter" />
+    </UserControl.Resources>
+
+    <Panel>
+        <Grid RowDefinitions="*, Auto, Auto">
+            <ContentControl Grid.Row="0"
+                            Content="{Binding NavigationService.CurrentView}" />
+
+            <Separator Grid.Row="1" />
+
+            <u:SelectionList Grid.Row="2"
+                             HorizontalAlignment="Stretch"
+                             ItemsSource="{Binding NavigationItems}"
+                             SelectedItem="{Binding SelectedNavigationItem}">
+                <u:SelectionList.Styles>
+                    <Style Selector="u|SelectionListItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </u:SelectionList.Styles>
+
+                <u:SelectionList.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid HorizontalAlignment="Stretch"
+                                     Rows="1" />
+                    </ItemsPanelTemplate>
+                </u:SelectionList.ItemsPanel>
+
+                <u:SelectionList.ItemTemplate>
+                    <DataTemplate x:DataType="models:NavigationItem">
+                        <i:Icon FontSize="32"
+                                ToolTip.Tip="{Binding Title}"
+                                Value="{Binding View, Converter={StaticResource ViewToIconConverter}}" />
+                    </DataTemplate>
+                </u:SelectionList.ItemTemplate>
+
+                <u:SelectionList.Indicator>
+                    <Border Height="5"
+                            Margin="0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            Background="{DynamicResource SemiBlue1}"
+                            Theme="{DynamicResource CardBorder}" />
+                </u:SelectionList.Indicator>
+            </u:SelectionList>
+        </Grid>
+        <u:OverlayDialogHost Name="host" />
+    </Panel>
+</UserControl>

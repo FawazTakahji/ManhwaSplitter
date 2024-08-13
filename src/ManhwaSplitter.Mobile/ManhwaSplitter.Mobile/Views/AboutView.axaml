@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="ManhwaSplitter.Mobile.Views.AboutView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ManhwaSplitter.Core.ViewModels;assembly=ManhwaSplitter.Core"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             x:DataType="viewModels:AboutViewModel"
+             mc:Ignorable="d">
+    <Design.DataContext>
+        <viewModels:AboutViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer Theme="{StaticResource MaterialModernScrollViewer}">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="5">
+            <Svg Width="128"
+                 Height="128"
+                 Path="/Assets/Icon.svg" />
+
+            <TextBlock HorizontalAlignment="Center"
+                       Classes="Headline6"
+                       Text="Manhwa Splitter"
+                       TextWrapping="Wrap" />
+            <TextBlock x:Name="TbVersion"
+                       HorizontalAlignment="Center"
+                       Classes="Subtitle1"
+                       Foreground="{DynamicResource MaterialPrimaryMidBrush}" />
+
+            <Button Margin="0,15,0,0"
+                    Command="{Binding CheckUpdatesCommand}"
+                    Content="Check Update" />
+            <ProgressBar IsIndeterminate="True"
+                         IsVisible="{Binding CheckUpdatesCommand.IsRunning}" />
+            <CheckBox HorizontalAlignment="Center"
+                      Content="Check On Startup"
+                      IsChecked="{Binding SettingsService.CurrentSettings.CheckUpdateOnStartup}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

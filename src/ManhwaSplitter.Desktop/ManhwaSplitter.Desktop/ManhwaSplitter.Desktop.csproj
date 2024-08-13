@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <AssemblyName>ManhwaSplitter</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AvaloniaResource Include="Assets\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.1.0" />
+        <PackageReference Include="Irihi.Ursa" Version="1.0.0" />
+        <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.0.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia" Version="9.4.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.4.0" />
+        <PackageReference Include="Semi.Avalonia" Version="11.1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\ManhwaSplitter.Core\ManhwaSplitter.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\Directory.Build.props">
+        <Link>Directory.Build.props</Link>
+      </Content>
+    </ItemGroup>
+</Project>
