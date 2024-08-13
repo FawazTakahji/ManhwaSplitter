@@ -8,15 +8,15 @@
     A cross-platform app for splitting long images.
     <br/>
     <br/>
-    <a href="https://github.com/FawazTakhji/ManhwaSplitter/issues/new?assignees=FawazTakahji&labels=bug&projects=&template=bug_report.md&title=Bug+report%3A">Report Bug</a>
+    <a href="https://github.com/FawazTakahji/ManhwaSplitter/issues/new?assignees=FawazTakahji&labels=bug&projects=&template=bug_report.md&title=Bug+report%3A">Report Bug</a>
     .
-    <a href="https://github.com/FawazTakhji/ManhwaSplitter/issues/new?assignees=FawazTakahji&labels=enhancement&projects=&template=feature_request.md&title=Feature+request%3A">Request Feature</a>
+    <a href="https://github.com/FawazTakahji/ManhwaSplitter/issues/new?assignees=FawazTakahji&labels=enhancement&projects=&template=feature_request.md&title=Feature+request%3A">Request Feature</a>
   </p>
 </p>
 
 ## Usage
 Go to the
-<a href="https://github.com/FawazTakhji/ManhwaSplitter/releases">releases</a>
+<a href="https://github.com/FawazTakahai/ManhwaSplitter/releases">releases</a>
 page and download the version for your platform.
 
 >Make sure to install the latest <a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">.NET 8 runtime</a> on desktop.
