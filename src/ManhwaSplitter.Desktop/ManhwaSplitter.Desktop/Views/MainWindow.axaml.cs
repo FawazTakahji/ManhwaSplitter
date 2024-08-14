@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Avalonia.Controls;
 using WindowHelper = ManhwaSplitter.Desktop.Helpers.Window;
 
@@ -5,11 +7,12 @@ namespace ManhwaSplitter.Desktop.Views;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(string[]? args)
     {
         InitializeComponent();
 
-        WindowHelper.RestoreLocation(this);
+        if (args is null || args.All(arg =>!arg.Equals("--norestore", StringComparison.OrdinalIgnoreCase)))
+            WindowHelper.RestoreLocation(this);
     }
 
     protected override void OnClosing(WindowClosingEventArgs e)
@@ -18,4 +21,11 @@ public partial class MainWindow : Window
 
         WindowHelper.SaveLocation(this);
     }
+
+#if DEBUG
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+#endif
 }
