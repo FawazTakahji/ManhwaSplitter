@@ -19,8 +19,8 @@
         <PackageReference Include="Avalonia.Svg.Skia" Version="11.1.0" />
         <PackageReference Include="Irihi.Ursa" Version="1.0.0" />
         <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.0.0" />
-        <PackageReference Include="Projektanker.Icons.Avalonia" Version="9.4.0" />
-        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.4.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia" Version="9.6.0" />
+        <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.6.0" />
         <PackageReference Include="Semi.Avalonia" Version="11.1.0.1" />
     </ItemGroup>
 
